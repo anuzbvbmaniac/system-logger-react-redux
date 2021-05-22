@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Header from "./components/utils/Header";
+import Navigation from "./layouts/Navigation";
+import Search from "./layouts/Search";
+import Logs from "./components/logs/Logs";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    return (
+        <div className="min-h-screen bg-gray-100">
+            <div className="bg-indigo-600 pb-32">
+
+                <Navigation/>
+
+                <Header title={'System Logs'}/>
+
+            </div>
+
+            <main className="-mt-32">
+                <div className="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
+                    <div className="bg-white rounded-lg shadow px-5 py-6 sm:px-6">
+
+                        <Search/>
+
+                        <Logs/>
+
+                    </div>
+                </div>
+            </main>
+
+        </div>
+    );
 }
 
 export default App;

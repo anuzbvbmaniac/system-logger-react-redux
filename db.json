@@ -1,0 +1,62 @@
+{
+  "logs": [
+    {
+      "id": 1,
+      "message": "Changed hard-drive on workstation WS005",
+      "workstation_id": "WS005",
+      "attention": false,
+      "date": "03-02-2021",
+      "tech": "Anuz Pandey"
+    },
+    {
+      "id": 2,
+      "message": "Workstation WS004 not posting",
+      "workstation_id": "WS004",
+      "attention": true,
+      "date": "01-02-2021",
+      "tech": "John Doe"
+    },
+    {
+      "id": 3,
+      "message": "Workstation WS001 needs upgrading",
+      "workstation_id": "WS001",
+      "attention": true,
+      "date": "03-02-2021",
+      "tech": "Anuz Pandey"
+    },
+    {
+      "id": 4,
+      "message": "Changed memory of Workstation WS002",
+      "workstation_id": "WS002",
+      "attention": false,
+      "date": "02-02-2021",
+      "tech": "Sam Smith"
+    }
+  ],
+  "techs": [
+    {
+      "id": 1,
+      "firstName": "Anuz",
+      "lastName": "Pandey",
+      "avatar": "https://cdn.dribbble.com/users/4215834/avatars/normal/fee7b98b9fd28c7627682480b3186de8.png"
+    },
+    {
+      "id": 2,
+      "firstName": "Sam",
+      "lastName": "Smith",
+      "avatar": "https://cdn.dribbble.com/users/4215834/avatars/normal/fee7b98b9fd28c7627682480b3186de8.png"
+    },
+    {
+      "id": 3,
+      "firstName": "John",
+      "lastName": "Doe",
+      "avatar": "https://cdn.dribbble.com/users/4215834/avatars/normal/fee7b98b9fd28c7627682480b3186de8.png"
+    },
+    {
+      "firstName": "Jen",
+      "lastName": "Williams",
+      "id": 4,
+      "avatar": "https://cdn.dribbble.com/users/4215834/avatars/normal/fee7b98b9fd28c7627682480b3186de8.png"
+    }
+  ]
+}
