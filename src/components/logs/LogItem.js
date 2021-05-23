@@ -24,7 +24,7 @@ const LogItem = ({ log }) => {
                             <div className="hidden md:block">
                                 <div>
                                     <p className="text-sm text-gray-900">
-                                        Updated on <Moment format={'MMMM Do YYYY, h:mm:ss a'} class={'font-bold'}>{log.date}</Moment>
+                                        Updated on <Moment format={'MMMM Do YYYY, h:mm:ss a'} className={'font-bold'}>{log.date}</Moment>
                                     </p>
                                     <p className="mt-2 flex items-center text-sm text-gray-500">
                                         {log.attention

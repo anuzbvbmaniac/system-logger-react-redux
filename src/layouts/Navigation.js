@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import logo from "../assets/img/logo.svg";
-import { SearchIcon } from "@heroicons/react/solid";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 
@@ -32,14 +31,14 @@ const Navigation = () => {
                                             itemIdx === 0 ? (
                                                 <Fragment key={item}>
                                                     {/* Current: "bg-indigo-700 text-white", Default: "text-white hover:bg-indigo-500 hover:bg-opacity-75" */}
-                                                    <a href="#" className="bg-indigo-700 text-white rounded-md py-2 px-3 text-sm font-medium">
+                                                    <a href="/" className="bg-indigo-700 text-white rounded-md py-2 px-3 text-sm font-medium">
                                                         {item}
                                                     </a>
                                                 </Fragment>
                                             ) : (
                                                 <a
                                                     key={item}
-                                                    href="#"
+                                                    href="/"
                                                     className="text-white hover:bg-indigo-500 hover:bg-opacity-75 rounded-md py-2 px-3 text-sm font-medium"
                                                 >
                                                     {item}
@@ -100,7 +99,7 @@ const Navigation = () => {
                                                             <Menu.Item key={item}>
                                                                 {({ active }) => (
                                                                     <a
-                                                                        href="#"
+                                                                        href="/"
                                                                         className={classNames(
                                                                             active ? 'bg-gray-100' : '',
                                                                             'block py-2 px-4 text-sm text-gray-700'
@@ -128,7 +127,7 @@ const Navigation = () => {
                                     <Fragment key={item}>
                                         {/* Current: "bg-indigo-700 text-white", Default: "text-white hover:bg-indigo-500 hover:bg-opacity-75" */}
                                         <a
-                                            href="#"
+                                            href="/"
                                             className="bg-indigo-700 text-white block rounded-md py-2 px-3 text-base font-medium"
                                         >
                                             {item}
@@ -137,7 +136,7 @@ const Navigation = () => {
                                 ) : (
                                     <a
                                         key={item}
-                                        href="#"
+                                        href="/"
                                         className="text-white hover:bg-indigo-500 hover:bg-opacity-75 block rounded-md py-2 px-3 text-base font-medium"
                                     >
                                         {item}
@@ -167,7 +166,7 @@ const Navigation = () => {
                                 {profile.map((item) => (
                                     <a
                                         key={item}
-                                        href="#"
+                                        href="/"
                                         className="block rounded-md py-2 px-3 text-base font-medium text-white hover:bg-indigo-500 hover:bg-opacity-75"
                                     >
                                         {item}
