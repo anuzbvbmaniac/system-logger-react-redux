@@ -58,5 +58,22 @@
       "id": 4,
       "avatar": "https://cdn.dribbble.com/users/4215834/avatars/normal/fee7b98b9fd28c7627682480b3186de8.png"
     }
+  ],
+  "workstations": [
+    {
+      "id": "WS001"
+    },
+    {
+      "id": "WS002"
+    },
+    {
+      "id": "WS003"
+    },
+    {
+      "id": "WS004"
+    },
+    {
+      "id": "WS005"
+    }
   ]
 }
