@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Dialog, Transition } from "@headlessui/react";
 
 const AddLogModal = (props) => {
@@ -9,8 +9,6 @@ const AddLogModal = (props) => {
     const [attention, setAttention] = useState(false);
     const [tech, setTech] = useState('');
     const [workstation, setWorkstation] = useState('');
-
-    const cancelButtonRef = useRef(null);
 
     const clearFields = () => {
         setMessage('');
@@ -40,12 +38,11 @@ const AddLogModal = (props) => {
     }
 
     return (
-        <Transition.Root show={open} as={Fragment}>
+        <Transition.Root show={open} as={Fragment} onClose={() => closeModal()}>
             <Dialog
                 as="div"
                 static
                 className="fixed z-10 inset-0 overflow-y-auto"
-                initialFocus={cancelButtonRef}
                 open={open}
                 onClose={setOpen}
             >
@@ -75,7 +72,7 @@ const AddLogModal = (props) => {
                     >
                         <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
                             <div>
-                                <div className="mt-3 text-center sm:mt-5">
+                                <div className="mt-1 text-center">
                                     <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
                                         Enter System Logs
                                     </Dialog.Title>
@@ -88,12 +85,12 @@ const AddLogModal = (props) => {
                             </div>
 
                             {/*  Form Elements  */}
-                            <div className="sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
+                            <div className="sm:grid sm:gap-3 sm:grid-flow-row-dense">
 
                                 <div className="md:col-span-2">
                                     <form onSubmit={onSubmit}>
                                         <div className="overflow-hidden sm:rounded-md">
-                                            <div className="px-4 py-5 sm:p-6">
+                                            <div className="p-2">
                                                 <div className="grid grid-cols-6 gap-6">
 
                                                     {/* Message Field */}
@@ -193,9 +190,8 @@ const AddLogModal = (props) => {
                                                     <div className="col-span-3">
                                                         <button
                                                             type="button"
-                                                            className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:text-sm"
+                                                            className="md:mt-0 sm:mt-0 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:text-sm"
                                                             onClick={closeModal}
-                                                            ref={cancelButtonRef}
                                                         >
                                                             Cancel
                                                         </button>
