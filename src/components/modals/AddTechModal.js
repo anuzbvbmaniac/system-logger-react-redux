@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 
 const AddTechModal = (props) => {
 
-    const [open, setOpen] = useState(props.open);
+    const [open, setOpen] = useState(props.modalStatus);
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -30,8 +30,8 @@ const AddTechModal = (props) => {
     }
 
     useEffect(() => {
-        setOpen(props.open);
-    }, [props.open]);
+        setOpen(props.modalStatus);
+    }, [props.modalStatus]);
 
     const closeTechModal = () => {
         props.setTechModalStatus(open);

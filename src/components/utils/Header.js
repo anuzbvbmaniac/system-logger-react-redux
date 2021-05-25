@@ -47,9 +47,9 @@ const Header = (props) => {
 
             </header>
 
-            <AddLogModal open={logModalStatus} setModalStatus={callBackFromLogModal}/>
+            <AddLogModal modalStatus={logModalStatus} setModalStatus={callBackFromLogModal}/>
 
-            <AddTechModal open={techModalStatus} setTechModalStatus={callBackFormTechModal}/>
+            <AddTechModal modalStatus={techModalStatus} setTechModalStatus={callBackFormTechModal}/>
         </>
     );
 };

@@ -1,9 +1,14 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import { connect } from "react-redux";
+import PropTypes from 'prop-types';
+
 import { Dialog, Transition } from "@headlessui/react";
 
-const AddLogModal = (props) => {
+import { addLog } from "../../actions/logsActions";
 
-    const [open, setOpen] = useState(props.open);
+const AddLogModal = ({ modalStatus, addLog, setModalStatus }) => {
+
+    const [open, setOpen] = useState(modalStatus);
 
     const [message, setMessage] = useState('');
     const [attention, setAttention] = useState(false);
@@ -15,27 +20,40 @@ const AddLogModal = (props) => {
         setAttention(false);
         setTech('');
         setWorkstation('');
-    }
+    };
 
     const onSubmit = (event) => {
         event.preventDefault();
         if (message === '' || tech === '' || workstation === '') {
             console.log('Empty Fields Submitted');
         } else {
-            console.log('Modal Data Submitted!' + message, attention, tech, workstation);
 
-            // Clear Fields
+            const data = {
+                message,
+                attention,
+                tech,
+                workstation_id: workstation,
+                date: new Date(),
+            };
+
+            addLog(data);
+
+            // Feedback like toastr or notification on success.
+            // #TODO
+
+            // Clear Fields and Close Modal
             clearFields();
+            closeModal();
         }
-    }
+    };
 
     useEffect(() => {
-        setOpen(props.open);
-    }, [props.open]);
+        setOpen(modalStatus);
+    }, [modalStatus]);
 
     const closeModal = () => {
-        props.setModalStatus(open);
-    }
+        setModalStatus(open);
+    };
 
     return (
         <Transition.Root show={open} as={Fragment} onClose={() => closeModal()}>
@@ -213,4 +231,11 @@ const AddLogModal = (props) => {
     );
 };
 
-export default AddLogModal;
+AddLogModal.propTypes = {
+    addLog: PropTypes.func.isRequired,
+};
+
+export default connect(
+    null,
+    { addLog }
+)(AddLogModal);

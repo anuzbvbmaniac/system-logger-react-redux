@@ -1,8 +1,18 @@
 import React from 'react';
-import { CheckCircleIcon, InformationCircleIcon, TrashIcon, UserIcon } from "@heroicons/react/solid";
 import Moment from "react-moment";
+import { connect } from "react-redux";
+import PropTypes from 'prop-types';
 
-const LogItem = ({ log }) => {
+import { CheckCircleIcon, InformationCircleIcon, TrashIcon, UserIcon } from "@heroicons/react/solid";
+
+import { deleteLog } from "../../actions/logsActions";
+
+const LogItem = ({ log, deleteLog }) => {
+
+    const onDelete = () => {
+        deleteLog(log.id);
+    }
+
     return (
         <li key={log.id}>
             <div className="block hover:bg-gray-50">
@@ -41,6 +51,7 @@ const LogItem = ({ log }) => {
                         <button
                             type="button"
                             className="inline-flex items-center px-3 py-3 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                            onClick={onDelete}
                         >
                             <TrashIcon className="-ml-0.5 mr-2 h-4 w-4" aria-hidden="true"/>
                             Delete
@@ -52,4 +63,12 @@ const LogItem = ({ log }) => {
     );
 };
 
-export default LogItem;
+LogItem.propTypes = {
+    log: PropTypes.object.isRequired,
+    deleteLog: PropTypes.func.isRequired,
+};
+
+export default connect(
+    null,
+    { deleteLog }
+)(LogItem);
