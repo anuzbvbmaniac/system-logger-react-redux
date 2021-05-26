@@ -38,22 +38,22 @@
       "id": 1,
       "firstName": "Anuz",
       "lastName": "Pandey",
-      "avatar": "https://cdn.dribbble.com/users/4215834/avatars/normal/fee7b98b9fd28c7627682480b3186de8.png",
-      "role": "Paradigm Representative"
+      "role": "System Adminstrator",
+      "avatar": "https://raw.githubusercontent.com/anuzbvbmaniac/dummyimage/main/anuz.png"
     },
     {
       "id": 2,
       "firstName": "Sam",
       "lastName": "Smith",
-      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      "role": "Lead Security Associate"
+      "role": "Lead Security Associate",
+      "avatar": "https://raw.githubusercontent.com/anuzbvbmaniac/dummyimage/main/m3.png"
     },
     {
       "id": 3,
       "firstName": "John",
       "lastName": "Doe",
-      "avatar": "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      "role": "Paradigm Representative"
+      "role": "Paradigm Representative",
+      "avatar": "https://raw.githubusercontent.com/anuzbvbmaniac/dummyimage/main/m5.png"
     },
     {
       "firstName": "Jen",
@@ -75,13 +75,6 @@
       "role": "System Designer",
       "avatar": "https://raw.githubusercontent.com/anuzbvbmaniac/dummyimage/main/f1.png",
       "id": 6
-    },
-    {
-      "firstName": "Denil",
-      "lastName": "Chitrakar",
-      "role": "Music Administrator",
-      "avatar": "https://raw.githubusercontent.com/anuzbvbmaniac/dummyimage/main/m2.png",
-      "id": 7
     },
     {
       "firstName": "Ayusha",

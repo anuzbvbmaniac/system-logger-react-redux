@@ -6,6 +6,7 @@ import AddTechModal from "../modals/AddTechModal";
 
 import { setTechAddModal } from "../../actions/techsActions";
 import PropTypes from "prop-types";
+import EditTechModal from "../modals/EditTechModal";
 
 const Header = ({ title, setTechAddModal }) => {
 
@@ -48,6 +49,7 @@ const Header = ({ title, setTechAddModal }) => {
             <AddLogModal modalStatus={logModalStatus} setModalStatus={callBackFromLogModal}/>
 
             <AddTechModal />
+            <EditTechModal />
         </>
     );
 };

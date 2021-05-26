@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Dialog, Transition } from "@headlessui/react";
 
 import { setModal, updateLog } from "../../actions/logsActions";
+import TechSelectOptions from "../techs/TechSelectOptions";
 
 const EditLogModal = ({ log, setModal, updateLog }) => {
 
@@ -137,11 +138,7 @@ const EditLogModal = ({ log, setModal, updateLog }) => {
                                                             onChange={event => setTech(event.target.value)}
                                                         >
                                                             <option value="" disabled>Select Technicians</option>
-                                                            <option value="John Doe">John Doe</option>
-                                                            <option value="Anuz Pandey">Anuz Pandey</option>
-                                                            <option value="Sam Smith">Sam Smith</option>
-                                                            <option value="Sam Smith">Sam Smith</option>
-                                                            <option value="Jen Williams">Jen Williams</option>
+                                                            <TechSelectOptions />
                                                         </select>
                                                     </div>
 

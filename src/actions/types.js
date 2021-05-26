@@ -21,3 +21,8 @@ export const TECHS_ERROR = 'TECHS_ERROR';
 
 export const SET_MODAL = 'SET_MODAL';
 export const SET_TECH_MODAL = 'SET_TECH_MODAL';
+export const SET_TECH_EDIT_MODAL = 'SET_TECH_EDIT_MODAL';
+export const SET_CURRENT_TECH = 'SET_CURRENT_TECH';
+export const CLEAR_CURRENT_TECH = 'CLEAR_CURRENT_TECH';
+
+
