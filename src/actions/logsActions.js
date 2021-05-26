@@ -1,4 +1,4 @@
-import { ADD_LOG, DELETE_LOG, GET_LOGS, LOGS_ERROR, SET_LOADING } from "./types";
+import { ADD_LOG, CLEAR_CURRENT, DELETE_LOG, GET_LOGS, LOGS_ERROR, SEARCH_LOGS, SET_CURRENT, SET_LOADING, SET_MODAL, UPDATE_LOG } from "./types";
 
 /**
  * Get Logs from Server
@@ -17,10 +17,10 @@ export const getLogs = () => { // Can be export const getLogs = () => async (dis
                 payload: data,
             });
         } catch (err) {
-            console.error(err.response.message);
+            console.error(err.response.statusText);
             dispatch({
                 type: LOGS_ERROR,
-                payload: err.response.message
+                payload: err.response.statusText
             });
         }
     };
@@ -53,7 +53,7 @@ export const addLog = (log) => {
         } catch (err) {
             dispatch({
                 type: LOGS_ERROR,
-                payload: err.response.data,
+                payload: err.response.statusText,
             });
         }
     };
@@ -70,7 +70,7 @@ export const deleteLog = (id) => {
             setLoading();
 
             await fetch(`/logs/${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
             });
 
             dispatch({
@@ -78,14 +78,90 @@ export const deleteLog = (id) => {
                 payload: id,
             });
         } catch (err) {
-            console.error(err.response.message);
+            console.error(err.response.statusText);
             dispatch({
                 type: LOGS_ERROR,
-                payload: err.response.message
+                payload: err.response.statusText
             });
         }
-    }
-}
+    };
+};
+
+/**
+ * Update the log details
+ * @param log
+ * @returns {(function(*): Promise<void>)|*}
+ */
+export const updateLog = (log) => {
+    return async (dispatch) => {
+        try {
+            setLoading();
+
+            const response = await fetch(`/logs/${log.id}`, {
+                method: 'PUT',
+                body: JSON.stringify(log),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const data = await response.json();
+
+            dispatch({
+                type: UPDATE_LOG,
+                payload: data,
+            });
+        } catch (err) {
+            dispatch({
+                type: LOGS_ERROR,
+                payload: err.response.statusText,
+            });
+        }
+    };
+};
+
+export const searchLogs = (query) => {
+    return async (dispatch) => {
+        try {
+            setLoading();
+
+            const response = await fetch(`/logs?q=${query}`);
+            const data = await response.json();
+
+            dispatch({
+                type: SEARCH_LOGS,
+                payload: data,
+            });
+        } catch (err) {
+            dispatch({
+                type: LOGS_ERROR,
+                payload: err.response.statusText,
+            });
+        }
+    };
+};
+
+/**
+ * Set Values to Current
+ * @param log
+ * @returns {{payload, type: string}}
+ */
+export const setCurrent = (log) => {
+    return {
+        type: SET_CURRENT,
+        payload: log,
+    };
+};
+
+/**
+ * Clear Current Value to null
+ * @returns {{type: string}}
+ */
+export const clearCurrent = () => {
+    return {
+        type: CLEAR_CURRENT,
+    };
+};
 
 /**
  * Set Loading to True
@@ -94,5 +170,16 @@ export const deleteLog = (id) => {
 export const setLoading = () => {
     return {
         type: SET_LOADING
+    };
+};
+
+/**
+ * Set Modal Status to True
+ * @returns {{type: string}}
+ */
+export const setModal = (status) => {
+    return {
+        type: SET_MODAL,
+        payload: status,
     };
 };

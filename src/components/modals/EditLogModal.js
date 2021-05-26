@@ -1,39 +1,66 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from "react-redux";
 import { Dialog, Transition } from "@headlessui/react";
 
-const EditLogModal = (props) => {
+import { setModal, updateLog } from "../../actions/logsActions";
 
-    const [open, setOpen] = useState(props.open);
+const EditLogModal = ({ log, setModal, updateLog }) => {
 
     const [message, setMessage] = useState('');
     const [attention, setAttention] = useState(false);
     const [tech, setTech] = useState('');
     const [workstation, setWorkstation] = useState('');
 
-    const cancelButtonRef = useRef(null);
+    useEffect(() => {
+        if (log.current) {
+            setMessage(log.current.message);
+            setAttention(log.current.attention);
+            setTech(log.current.tech);
+            setWorkstation(log.current.workstation_id);
+        }
+    }, [log]);
+
+    const clearFields = () => {
+        setMessage('');
+        setAttention(false);
+        setTech('');
+        setWorkstation('');
+    };
 
     const onSubmit = (event) => {
         event.preventDefault();
-        console.log('Modal Data Submitted!' + message, attention, tech, workstation);
-    }
+        if (message === '' || tech === '' || workstation === '') {
+            console.log('Please enter the required values.');
+        } else {
+            const data = {
+                id: log.current.id,
+                message,
+                attention,
+                tech,
+                workstation_id: workstation,
+                date: new Date(),
+            }
 
-    useEffect(() => {
-        setOpen(props.open);
-    }, [props.open]);
+            updateLog(data);
 
-    const closeModal = () => {
-        props.setModalStatus(open);
-    }
+            clearFields();
+            setModal(false);
+        }
+    };
+
+    const closeEditModalForm = () => {
+        setModal(false);
+    };
 
     return (
-        <Transition.Root show={open} as={Fragment}>
+        <Transition.Root show={log.showEditModal} as={Fragment}>
             <Dialog
                 as="div"
                 static
                 className="fixed z-10 inset-0 overflow-y-auto"
-                initialFocus={cancelButtonRef}
-                open={open}
-                onClose={setOpen}
+                open={log.showEditModal}
+                onClose={closeEditModalForm}
             >
                 <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                     <Transition.Child
@@ -180,8 +207,7 @@ const EditLogModal = (props) => {
                                                         <button
                                                             type="button"
                                                             className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:text-sm"
-                                                            onClick={closeModal}
-                                                            ref={cancelButtonRef}
+                                                            onClick={closeEditModalForm}
                                                         >
                                                             Cancel
                                                         </button>
@@ -203,4 +229,16 @@ const EditLogModal = (props) => {
     );
 };
 
-export default EditLogModal;
+EditLogModal.propTypes = {
+    log: PropTypes.object.isRequired,
+    updateLog: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+    log: state.log,
+});
+
+export default connect(
+    mapStateToProps,
+    { setModal, updateLog }
+)(EditLogModal);

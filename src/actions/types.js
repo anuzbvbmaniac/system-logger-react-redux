@@ -14,6 +14,10 @@ export const SET_LOADING = 'SET_LOADING';
 
 export const GET_TECHS = 'GET_TECHS';
 export const ADD_TECH = 'ADD_TECH';
+export const UPDATE_TECH = 'UPDATE_TECH';
 export const DELETE_TECH = 'DELETE_TECH';
 
 export const TECHS_ERROR = 'TECHS_ERROR';
+
+export const SET_MODAL = 'SET_MODAL';
+export const SET_TECH_MODAL = 'SET_TECH_MODAL';

@@ -1,10 +1,11 @@
-import { ADD_LOG, DELETE_LOG, GET_LOGS, LOGS_ERROR } from "../actions/types";
+import { ADD_LOG, CLEAR_CURRENT, DELETE_LOG, GET_LOGS, LOGS_ERROR, SEARCH_LOGS, SET_CURRENT, SET_LOADING, SET_MODAL, UPDATE_LOG } from "../actions/types";
 
 const initialState = {
     logs: null,
     current: null,
     loading: false,
     error: null,
+    showEditModal: false,
 };
 
 const logReducer = (state = initialState, action) => {
@@ -27,12 +28,42 @@ const logReducer = (state = initialState, action) => {
                 ...state,
                 logs: state.logs.filter(log => log.id !== action.payload),
                 loading: false,
-            }
+            };
+        case UPDATE_LOG:
+            return {
+                ...state,
+                logs: state.logs.map(log => log.id === action.payload.id ? action.payload : log)
+            };
+        case SEARCH_LOGS:
+            return {
+                ...state,
+                logs: action.payload,
+            };
+        case SET_CURRENT:
+            return {
+                ...state,
+                current: action.payload
+            };
+        case CLEAR_CURRENT:
+            return {
+                ...state,
+                current: null,
+            };
+        case SET_LOADING:
+            return {
+                ...state,
+                loading: true,
+            };
         case LOGS_ERROR:
             console.log(action.payload);
             return {
                 ...state,
                 error: action.payload,
+            };
+        case SET_MODAL:
+            return {
+                ...state,
+                showEditModal: action.payload,
             };
         default:
             return state;

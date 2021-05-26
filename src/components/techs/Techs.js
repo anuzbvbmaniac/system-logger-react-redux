@@ -1,38 +1,45 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+
 import Spinner from "../../layouts/Spinner";
 import TechItem from "./TechItem";
 
-const Techs = () => {
+import { getTechs } from "../../actions/techsActions";
+import { connect } from "react-redux";
 
-    const [loading, setLoading] = useState(false);
-    const [techs, setTechs] = useState([]);
+const Techs = ({ tech: { techs, loading }, getTechs }) => {
 
     useEffect(() => {
         getTechs();
         // eslint-disable-next-line
     }, []);
 
-    const getTechs = async () => {
-        setLoading(true);
-
-        const response = await fetch('/techs');
-        const data = await response.json();
-
-        setTechs(data);
-        setLoading(false);
-    }
-
     if (loading) {
-        return <Spinner/>
+        return <Spinner/>;
     }
 
     return (
         <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {techs.map((tech) => (
-                <TechItem key={tech.id} tech={tech}/>
-            ))}
+            {!loading && techs === null
+                ? (<p className="p-4">No Technicians Found.</p>)
+                : (techs.map((tech) => (
+                    <TechItem key={tech.id} tech={tech}/>
+                )))
+            }
         </ul>
     );
 };
 
-export default Techs;
+Techs.propTypes = {
+    tech: PropTypes.object.isRequired,
+    getTechs: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+    tech: state.tech
+});
+
+export default connect(
+    mapStateToProps,
+    { getTechs }
+)(Techs);

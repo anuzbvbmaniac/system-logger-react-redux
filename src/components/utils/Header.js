@@ -1,28 +1,26 @@
 import React, { useCallback, useState } from 'react';
+import { connect } from "react-redux";
 import { DocumentAddIcon, UserAddIcon } from "@heroicons/react/solid";
 import AddLogModal from "../modals/AddLogModal";
 import AddTechModal from "../modals/AddTechModal";
 
-const Header = (props) => {
+import { setTechAddModal } from "../../actions/techsActions";
+import PropTypes from "prop-types";
+
+const Header = ({ title, setTechAddModal }) => {
 
     const [logModalStatus, setLogModalStatus] = useState(false);
-    const [techModalStatus, setTechModalStatus] = useState(false);
 
     const callBackFromLogModal = useCallback((status) => {
         setLogModalStatus(!status);
     }, []);
-
-    const callBackFormTechModal = useCallback((status) => {
-        setTechModalStatus(!status)
-    }, [],);
-
 
     return (
         <>
             <header className="py-10 justify-between flex max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
 
                 <div className="max-w-7xl">
-                    <h1 className="text-3xl font-bold text-white">{props.title}</h1>
+                    <h1 className="text-3xl font-bold text-white">{title}</h1>
                 </div>
 
                 <div>
@@ -38,7 +36,7 @@ const Header = (props) => {
                     <button
                         type="button"
                         className="ml-2 inline-flex items-center px-4 py-2 border-2 border-white rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2"
-                        onClick={() => setTechModalStatus(!techModalStatus)}
+                        onClick={() => setTechAddModal(true)}
                     >
                         <UserAddIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true"/>
                         Add Techs
@@ -49,10 +47,16 @@ const Header = (props) => {
 
             <AddLogModal modalStatus={logModalStatus} setModalStatus={callBackFromLogModal}/>
 
-            <AddTechModal modalStatus={techModalStatus} setTechModalStatus={callBackFormTechModal}/>
+            <AddTechModal />
         </>
     );
 };
 
+Header.propTypes = {
+    setTechAddModal: PropTypes.func.isRequired,
+}
 
-export default Header;
+export default connect(
+    null,
+    { setTechAddModal }
+)(Header);

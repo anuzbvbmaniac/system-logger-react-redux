@@ -1,9 +1,12 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
 import { Dialog, Transition } from "@headlessui/react";
 
-const AddTechModal = (props) => {
+import { setTechAddModal, addTech } from "../../actions/techsActions";
 
-    const [open, setOpen] = useState(props.modalStatus);
+const AddTechModal = ({ setTechAddModal, addTech, tech: { showAddModal } }) => {
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -15,36 +18,41 @@ const AddTechModal = (props) => {
         setLastName('');
         setAvatarURL('');
         setRole('');
-    }
+    };
 
     const onSubmit = (event) => {
         event.preventDefault();
         if (firstName === '' || lastName === '' || avatarURL === '' || role === '') {
             console.log('Empty Fields Submitted');
         } else {
-            console.log('Modal Data Submitted!' + firstName, lastName, avatarURL);
+
+            const data = {
+                firstName,
+                lastName,
+                role,
+                avatar: avatarURL
+            }
+
+            addTech(data);
 
             // Clear Fields
             clearFields();
+            closeTechModal();
         }
-    }
-
-    useEffect(() => {
-        setOpen(props.modalStatus);
-    }, [props.modalStatus]);
+    };
 
     const closeTechModal = () => {
-        props.setTechModalStatus(open);
-    }
+        setTechAddModal(false);
+    };
 
     return (
-        <Transition.Root show={open} as={Fragment} onClose={() => closeTechModal()}>
+        <Transition.Root show={showAddModal} as={Fragment} onClose={() => closeTechModal()}>
             <Dialog
                 as="div"
                 static
                 className="fixed z-10 inset-0 overflow-y-auto"
-                open={open}
-                onClose={setOpen}
+                open={showAddModal}
+                onClose={closeTechModal}
             >
                 <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                     <Transition.Child
@@ -194,4 +202,17 @@ const AddTechModal = (props) => {
     );
 };
 
-export default AddTechModal;
+AddTechModal.propTypes = {
+    tech: PropTypes.object.isRequired,
+    setTechAddModal: PropTypes.func.isRequired,
+    addTech: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+    tech: state.tech,
+});
+
+export default connect(
+    mapStateToProps,
+    { setTechAddModal, addTech }
+)(AddTechModal);

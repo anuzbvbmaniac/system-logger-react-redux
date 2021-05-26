@@ -5,13 +5,18 @@ import PropTypes from 'prop-types';
 
 import { CheckCircleIcon, InformationCircleIcon, TrashIcon, UserIcon } from "@heroicons/react/solid";
 
-import { deleteLog } from "../../actions/logsActions";
+import { deleteLog, setCurrent, setModal } from "../../actions/logsActions";
 
-const LogItem = ({ log, deleteLog }) => {
+const LogItem = ({ log, deleteLog, setModal, setCurrent }) => {
 
     const onDelete = () => {
         deleteLog(log.id);
-    }
+    };
+
+    const openEditModalForm = () => {
+        setModal(true);
+        setCurrent(log);
+    };
 
     return (
         <li key={log.id}>
@@ -24,7 +29,9 @@ const LogItem = ({ log, deleteLog }) => {
                             </span>
                         </div>
                         <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
-                            <div>
+                            <div
+                                onClick={openEditModalForm}
+                            >
                                 <p className="text-sm font-medium text-indigo-600 truncate">{log.message}</p>
                                 <p className="mt-2 flex items-center text-sm text-gray-500">
                                     <UserIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true"/>
@@ -66,9 +73,14 @@ const LogItem = ({ log, deleteLog }) => {
 LogItem.propTypes = {
     log: PropTypes.object.isRequired,
     deleteLog: PropTypes.func.isRequired,
+    setCurrent: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = state => ({
+    logs: state.log
+});
+
 export default connect(
-    null,
-    { deleteLog }
+    mapStateToProps,
+    { deleteLog, setModal, setCurrent }
 )(LogItem);
